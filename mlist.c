@@ -30,7 +30,7 @@ typedef struct bucket{
 }Bucket;
 
 int i = 0;
-static void resize(MList * ml, N_list *nlist ){
+static void resize(const MList * ml, N_list *nlist ){
     i++;
     //printf(" resized %d   \n",i );
 

@@ -148,7 +148,7 @@ const MEntry* MEntry_get(FILE *fd){
         
         
         char *list[20];
-        i = 0;
+        int i = 0;
         while(split_word!=NULL){
             //printf("%s \n", split_word);
             list[i++] =  split_word;

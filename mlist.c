@@ -315,6 +315,7 @@ static void N_destroy(const MList *ml){
             (the_nlist+l)->data->destroy((the_nlist+l)->data);
         }
     }
+    free(the_nlist);
     // }
     
     

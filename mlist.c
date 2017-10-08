@@ -99,6 +99,8 @@ const MList *MList_create(void){
     Bucket * the_bucket = (Bucket *) malloc(sizeof(Bucket));
     if (the_bucket == NULL){
         
+        free(the_mlist);
+        the_mlist = NULL;
         return NULL;
         
     }
@@ -106,6 +108,10 @@ const MList *MList_create(void){
     N_list * the_nlist = (N_list *) malloc(sizeof(N_list) * size);
     
     if (the_nlist == NULL){
+        free(the_mlist);
+        the_mlist = NULL;
+        free(the_bucket);
+        the_bucket = NULL;
         return NULL;
     }
     int i;
@@ -203,12 +209,10 @@ static int N_add(const MList *ml, const MEntry *me){
         
     }
     
-    
-    
-    
     return 0;
 }
-    
+
+
     /*
      * lookup - looks for MEntry in the list, returns matching entry or NULL
      */
@@ -254,13 +258,23 @@ static const MEntry * N_lookup(const MList *ml, const MEntry *me){
 
 static void N_destroy(const MList *ml){
     N_list * the_nlist = ((Bucket*)ml->self)->list;
-    //int size = ((Bucket*)ml->self)->size;
-    while(the_nlist!=NULL){
-        N_list * temp = the_nlist;
-        the_nlist = the_nlist->next;
-        free(temp);
-        temp = NULL;
+    int size = ((Bucket*)ml->self)->size;
+    int i;
+    N_list *index;
+    for(i = 0; i < size; i++){
+        index = the_nlist + i;
+        
+        while(index!=NULL){
+            N_list * temp = index;
+            index = index->next;
+            free(temp);
+            temp = NULL;
+        }
+
     }
+    
+    
+   
     Bucket * the_bucket = (Bucket*)ml->self;
     free(the_bucket);
     the_bucket = NULL;

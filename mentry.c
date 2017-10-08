@@ -91,7 +91,8 @@ const MEntry* MEntry_get(FILE *fd){
         split_word = strtok(line," ,.\n");
         //printf("!!! %s ", split_word);
         
-        for(int i = 0; split_word[i]; i++){
+        int i;
+        for(i = 0; split_word[i]; i++){
             split_word[i] = tolower(split_word[i]);
         }
         
@@ -147,7 +148,7 @@ const MEntry* MEntry_get(FILE *fd){
         
         
         char *list[20];
-        int i = 0;
+        i = 0;
         while(split_word!=NULL){
             //printf("%s \n", split_word);
             list[i++] =  split_word;

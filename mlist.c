@@ -49,7 +49,8 @@ static void resize(MList * ml, N_list *nlist ){
     //    if (new_nlist == NULL){
     //        return NULL;
     //    }
-    for(int i = 0; i < size; i++){
+    int i;
+    for(i = 0; i < size; i++){
         (new_nlist+i)->data = NULL;
         (new_nlist+i)->next = NULL;
     }
@@ -59,7 +60,8 @@ static void resize(MList * ml, N_list *nlist ){
     ((Bucket*)ml->self)->size = new_size;
     ((Bucket*)ml->self)->list = new_nlist;
     
-    for (int i = 0; i < size; i ++){
+    i = 0;
+    for (i = 0; i < size; i ++){
         
         N_list * index =  nlist+i;
         
@@ -107,7 +109,8 @@ const MList *MList_create(void){
     if (the_nlist == NULL){
         return NULL;
     }
-    for(int i = 0; i < size; i++){
+    int i;
+    for(i = 0; i < size; i++){
         (the_nlist+i)->data = NULL;
         (the_nlist+i)->next = NULL;
     }

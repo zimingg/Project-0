@@ -257,28 +257,67 @@ static const MEntry * N_lookup(const MList *ml, const MEntry *me){
      */
 
 static void N_destroy(const MList *ml){
+//    N_list * the_nlist = ((Bucket*)ml->self)->list;
+//    int size = ((Bucket*)ml->self)->size;
+//    int i;
+//    N_list *index;
+//    for(i = 0; i < size; i++){
+//        index = the_nlist + i;
+//        
+//        while(index!=NULL){
+//            N_list * temp = index;
+//            index = index->next;
+//            free(temp);
+//            temp = NULL;
+//        }
+//
+//    }
+//    
+//    
+//   
+//    Bucket * the_bucket = (Bucket*)ml->self;
+//    free(the_bucket);
+//    the_bucket = NULL;
+//    free((void *)ml);
+    
     N_list * the_nlist = ((Bucket*)ml->self)->list;
     int size = ((Bucket*)ml->self)->size;
     int i;
     N_list *index;
+    N_list * temp;
+    
+    
     for(i = 0; i < size; i++){
-        index = the_nlist + i;
-        
-        while(index!=NULL){
-            N_list * temp = index;
-            index = index->next;
-            free(temp);
-            temp = NULL;
+        index = (the_nlist + i)->next;
+        if (index == NULL){
+            
+            
         }
-
+        else{
+            
+            while(index->next!=NULL){
+                temp = index;
+                index = index->next;
+                //printf("%d",temp->next == NULL);
+                free(temp);
+                temp = NULL;
+            }
+            free(index);
+        }
+        
     }
+    free(the_nlist);
+    // }
     
     
-   
+    
+    
     Bucket * the_bucket = (Bucket*)ml->self;
     free(the_bucket);
     the_bucket = NULL;
     free((void *)ml);
+    
+
     
 }
 

@@ -33,12 +33,9 @@ int i = 0;
 static void resize(const MList * ml, N_list *nlist ){
     i++;
     //printf(" resized %d   \n",i );
-
+    
     //printf("resized! \n");
     //printf("%d ",i);
-    
-    
-    
     int size = ((Bucket*)ml->self)->size;
     int new_size = size * 2;
     
@@ -49,8 +46,7 @@ static void resize(const MList * ml, N_list *nlist ){
     //    if (new_nlist == NULL){
     //        return NULL;
     //    }
-    int i;
-    for(i = 0; i < size; i++){
+    for(int i = 0; i < new_size; i++){
         (new_nlist+i)->data = NULL;
         (new_nlist+i)->next = NULL;
     }
@@ -60,24 +56,110 @@ static void resize(const MList * ml, N_list *nlist ){
     ((Bucket*)ml->self)->size = new_size;
     ((Bucket*)ml->self)->list = new_nlist;
     
-    i = 0;
-    for (i = 0; i < size; i ++){
+    for (int i = 0; i < size; i++){
         
         N_list * index =  nlist+i;
         
-        if((index->data)!=NULL){
-            // printf("%lu",(index->data)->hash((index->data),new_size));
-            ml->add(ml,(MEntry*)index->data);
-        }
+        //        if((index->data)!=NULL){
+        //            ml->add(ml,(MEntry*)index->data);
+        //        }
+        //
+        //        while((index->next)!=NULL){
+        //
+        //            index = index->next;
+        //            ml->add(ml,index->data);
+        //        }
         
-        while((index->next)!=NULL){
+        if(index == NULL){
             
-            index = index->next;
-            ml->add(ml,index->data);
+        }
+        else{
             
+            while(index->next!=NULL){
+                ml->add(ml,(MEntry*)index->data);
+                index = index->next;
+            }
+            ml->add(ml,(MEntry*)index->data);
         }
     }
     
+    N_list *index;
+    N_list * temp;
+    
+    for(i = 0; i < size; i++){
+        index = (nlist + i)->next;
+        if (index == NULL){
+            
+            
+        }
+        else{
+            
+            while(index->next!=NULL){
+                temp = index;
+                index = index->next;
+                //printf("%d",temp->next == NULL);
+                //(temp->data)->destroy((temp->data));
+                free(temp);
+                temp = NULL;
+            }
+            //(index->data)->destroy((index->data));
+            free(index);
+        }
+        
+    }
+    
+   
+    free(nlist);
+    nlist = NULL;
+    
+
+//    i++;
+//    //printf(" resized %d   \n",i );
+//
+//    //printf("resized! \n");
+//    //printf("%d ",i);
+//    
+//    
+//    
+//    int size = ((Bucket*)ml->self)->size;
+//    int new_size = size * 2;
+//    
+//    fprintf(stderr, "Change size from %d to %d. \n",size,new_size);
+//    
+//    N_list * new_nlist = (N_list * )malloc(sizeof(N_list) * new_size);
+//    
+//    //    if (new_nlist == NULL){
+//    //        return NULL;
+//    //    }
+//    int i;
+//    for(i = 0; i < size; i++){
+//        (new_nlist+i)->data = NULL;
+//        (new_nlist+i)->next = NULL;
+//    }
+//    
+//    //N_list * old_list = (N_list*)ml->self;
+//    
+//    ((Bucket*)ml->self)->size = new_size;
+//    ((Bucket*)ml->self)->list = new_nlist;
+//    
+//    i = 0;
+//    for (i = 0; i < size; i ++){
+//        
+//        N_list * index =  nlist+i;
+//        
+//        if((index->data)!=NULL){
+//            // printf("%lu",(index->data)->hash((index->data),new_size));
+//            ml->add(ml,(MEntry*)index->data);
+//        }
+//        
+//        while((index->next)!=NULL){
+//            
+//            index = index->next;
+//            ml->add(ml,index->data);
+//            
+//        }
+//    }
+//    
 
 }
 

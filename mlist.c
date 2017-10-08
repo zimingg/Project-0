@@ -300,7 +300,7 @@ static void N_destroy(const MList *ml){
                 temp = index;
                 index = index->next;
                 //printf("%d",temp->next == NULL);
-                (temp->data)->destroy;
+                (temp->data)->destroy((temp->data));
                 free(temp);
                 temp = NULL;
             }
@@ -312,7 +312,7 @@ static void N_destroy(const MList *ml){
     for(l=0; l<size;l++){
         if((the_nlist+l)->data!=NULL){
             //free((the_nlist+i)->data);
-            (the_nlist+i)->data->destroy;
+            (the_nlist+l)->data->destroy((the_nlist+l)->data);
         }
     }
     // }

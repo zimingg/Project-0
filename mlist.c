@@ -76,9 +76,8 @@ static void resize(const MList * ml, N_list *nlist ){
             ml->add(ml,index->data);
             
         }
-        
-        
     }
+    
 
 }
 
@@ -255,6 +254,7 @@ static const MEntry * N_lookup(const MList *ml, const MEntry *me){
 
 static void N_destroy(const MList *ml){
     N_list * the_nlist = ((Bucket*)ml->self)->list;
+    //int size = ((Bucket*)ml->self)->size;
     while(the_nlist!=NULL){
         N_list * temp = the_nlist;
         the_nlist = the_nlist->next;

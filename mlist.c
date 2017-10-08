@@ -280,6 +280,7 @@ static void N_destroy(const MList *ml){
 //    the_bucket = NULL;
 //    free((void *)ml);
     
+    
     N_list * the_nlist = ((Bucket*)ml->self)->list;
     int size = ((Bucket*)ml->self)->size;
     int i;
@@ -306,7 +307,12 @@ static void N_destroy(const MList *ml){
         }
         
     }
-    free(the_nlist);
+    int l;
+    for(l=0; l<size;l++){
+        if((the_nlist+l)->data!=NULL){
+            free((the_nlist+i)->data);
+        }
+    }
     // }
     
     
@@ -316,7 +322,6 @@ static void N_destroy(const MList *ml){
     free(the_bucket);
     the_bucket = NULL;
     free((void *)ml);
-    
 
     
 }

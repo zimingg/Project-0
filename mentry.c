@@ -199,8 +199,7 @@ const MEntry* MEntry_get(FILE *fd){
  */
 static unsigned long N_hash(const MEntry *me, unsigned long size){
     
-//    char * buff;
-//    char * buff2;
+
     //printf(" <%s> ", ((Address*)me->self)->surname);
     char string[100]="";
     strcat(string,((Address*)me->self)->surname);
@@ -210,14 +209,6 @@ static unsigned long N_hash(const MEntry *me, unsigned long size){
     sprintf(temp, "%d",((Address*)me->self)->house_number );
     strcat(string,temp);
     
-//    buff = (char*)malloc(sizeof(char)* strlen(string)+5);
-//    buff2 = buff;
-    
-//    for (int i = 0; i < strlen(string); i++){
-//        append(buff,string[i]);
-//        
-//    }
-//    buff2 = string;
 
     
     unsigned long hash = 5381;
@@ -229,10 +220,6 @@ static unsigned long N_hash(const MEntry *me, unsigned long size){
     
     while ((c = *buff++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-    
-//    free(buff);
-//    buff = NULL;
-//    buff2 = NULL;
     
     
     //printf("before return %lu \n",hash % size);

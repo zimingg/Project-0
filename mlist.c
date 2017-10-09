@@ -39,7 +39,6 @@ static int resize(const MList * ml, N_list *nlist ){
     int size = ((Bucket*)ml->self)->size;
     int new_size = size * 2;
     
-    fprintf(stderr, "Change size from %d to %d. \n",size,new_size);
     
     N_list * new_nlist = (N_list * )malloc(sizeof(N_list) * new_size);
     if (new_nlist == NULL){
@@ -103,57 +102,12 @@ static int resize(const MList * ml, N_list *nlist ){
    
     free(nlist);
     nlist = NULL;
+    fprintf(stderr, "Change size from %d to %d. \n",size,new_size);
+
     
     return 1;
     
 
-//    i++;
-//    //printf(" resized %d   \n",i );
-//
-//    //printf("resized! \n");
-//    //printf("%d ",i);
-//    
-//    
-//    
-//    int size = ((Bucket*)ml->self)->size;
-//    int new_size = size * 2;
-//    
-//    fprintf(stderr, "Change size from %d to %d. \n",size,new_size);
-//    
-//    N_list * new_nlist = (N_list * )malloc(sizeof(N_list) * new_size);
-//    
-//    //    if (new_nlist == NULL){
-//    //        return NULL;
-//    //    }
-//    int i;
-//    for(i = 0; i < size; i++){
-//        (new_nlist+i)->data = NULL;
-//        (new_nlist+i)->next = NULL;
-//    }
-//    
-//    //N_list * old_list = (N_list*)ml->self;
-//    
-//    ((Bucket*)ml->self)->size = new_size;
-//    ((Bucket*)ml->self)->list = new_nlist;
-//    
-//    i = 0;
-//    for (i = 0; i < size; i ++){
-//        
-//        N_list * index =  nlist+i;
-//        
-//        if((index->data)!=NULL){
-//            // printf("%lu",(index->data)->hash((index->data),new_size));
-//            ml->add(ml,(MEntry*)index->data);
-//        }
-//        
-//        while((index->next)!=NULL){
-//            
-//            index = index->next;
-//            ml->add(ml,index->data);
-//            
-//        }
-//    }
-//    
 
 }
 
@@ -340,29 +294,6 @@ static const MEntry * N_lookup(const MList *ml, const MEntry *me){
      */
 
 static void N_destroy(const MList *ml){
-//    N_list * the_nlist = ((Bucket*)ml->self)->list;
-//    int size = ((Bucket*)ml->self)->size;
-//    int i;
-//    N_list *index;
-//    for(i = 0; i < size; i++){
-//        index = the_nlist + i;
-//        
-//        while(index!=NULL){
-//            N_list * temp = index;
-//            index = index->next;
-//            free(temp);
-//            temp = NULL;
-//        }
-//
-//    }
-//    
-//    
-//   
-//    Bucket * the_bucket = (Bucket*)ml->self;
-//    free(the_bucket);
-//    the_bucket = NULL;
-//    free((void *)ml);
-    
     
     N_list * the_nlist = ((Bucket*)ml->self)->list;
     int size = ((Bucket*)ml->self)->size;

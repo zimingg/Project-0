@@ -274,7 +274,7 @@ static int N_add(const MList *ml, const MEntry *me){
                 
                 
                 //resize
-            resize(ml, nlist);
+            //resize(ml, nlist);
                 
             }
     
@@ -386,6 +386,7 @@ static void N_destroy(const MList *ml){
                 free(temp);
                 temp = NULL;
             }
+            (index->data)->destroy((index->data));
             free(index);
         }
         

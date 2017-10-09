@@ -30,7 +30,7 @@ typedef struct bucket{
 }Bucket;
 
 
-static void resize(const MList * ml, N_list *nlist ){
+static int resize(const MList * ml, N_list *nlist ){
     int i;
     //printf(" resized %d   \n",i );
     
@@ -42,10 +42,11 @@ static void resize(const MList * ml, N_list *nlist ){
     fprintf(stderr, "Change size from %d to %d. \n",size,new_size);
     
     N_list * new_nlist = (N_list * )malloc(sizeof(N_list) * new_size);
+    if (new_nlist == NULL){
+        return 0;
+    }
     
-    //    if (new_nlist == NULL){
-    //        return NULL;
-    //    }
+   
     for(i = 0; i < new_size; i++){
         (new_nlist+i)->data = NULL;
         (new_nlist+i)->next = NULL;
@@ -102,6 +103,8 @@ static void resize(const MList * ml, N_list *nlist ){
    
     free(nlist);
     nlist = NULL;
+    
+    return 1;
     
 
 //    i++;
@@ -265,7 +268,14 @@ static int N_add(const MList *ml, const MEntry *me){
                 
                 
                 //resize
-            resize(ml, nlist);
+            int feedback = resize(ml, nlist);
+                
+            if (feedback == 0){
+                    
+                fprintf(stderr, "Resize failed!");
+                    
+                }
+
                 
             }
     

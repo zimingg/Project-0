@@ -243,7 +243,7 @@ static int N_add(const MList *ml, const MEntry *me){
         N_list *index = nlist+hash_num;
         
         if(index->data == NULL){
-            index->data = me;
+            index->data = (MEntry*)me;
             return 1;
         }
         else{
@@ -260,7 +260,7 @@ static int N_add(const MList *ml, const MEntry *me){
             if (new == NULL ){
                 return 0;
             }
-            new->data = me;
+            new->data = (MEntry*)me;
             new->next = NULL;
             
             index->next = new;
@@ -268,7 +268,7 @@ static int N_add(const MList *ml, const MEntry *me){
                 
                 
                 //resize
-            int feedback = resize(ml, nlist);
+            int feedback = resize((MList*)ml, nlist);
                 
             if (feedback == 0){
                     

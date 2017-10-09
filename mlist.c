@@ -29,9 +29,9 @@ typedef struct bucket{
     
 }Bucket;
 
-int i = 0;
+
 static void resize(const MList * ml, N_list *nlist ){
-    i++;
+    int i;
     //printf(" resized %d   \n",i );
     
     //printf("resized! \n");
@@ -46,7 +46,7 @@ static void resize(const MList * ml, N_list *nlist ){
     //    if (new_nlist == NULL){
     //        return NULL;
     //    }
-    for(int i = 0; i < new_size; i++){
+    for(i = 0; i < new_size; i++){
         (new_nlist+i)->data = NULL;
         (new_nlist+i)->next = NULL;
     }
@@ -56,7 +56,7 @@ static void resize(const MList * ml, N_list *nlist ){
     ((Bucket*)ml->self)->size = new_size;
     ((Bucket*)ml->self)->list = new_nlist;
     
-    for (int i = 0; i < size; i++){
+    for (i = 0; i < size; i++){
         
         N_list * index =  nlist+i;
         

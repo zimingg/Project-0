@@ -51,7 +51,8 @@ static void resize(const MList * ml, N_list *nlist ){
         (new_nlist+i)->next = NULL;
     }
     
-    //N_list * old_list = (N_list*)ml->self;
+    //N_list * old_list = ((Bucket*)ml->self)->list;
+
     
     ((Bucket*)ml->self)->size = new_size;
     ((Bucket*)ml->self)->list = new_nlist;
@@ -59,16 +60,6 @@ static void resize(const MList * ml, N_list *nlist ){
     for (i = 0; i < size; i++){
         
         N_list * index =  nlist+i;
-        
-        //        if((index->data)!=NULL){
-        //            ml->add(ml,(MEntry*)index->data);
-        //        }
-        //
-        //        while((index->next)!=NULL){
-        //
-        //            index = index->next;
-        //            ml->add(ml,index->data);
-        //        }
         
         if(index == NULL){
             
@@ -274,7 +265,7 @@ static int N_add(const MList *ml, const MEntry *me){
                 
                 
                 //resize
-            //resize(ml, nlist);
+            resize(ml, nlist);
                 
             }
     

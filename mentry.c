@@ -91,6 +91,16 @@ const MEntry* MEntry_get(FILE *fd){
         split_word = strtok(line," ,.\n");
         //printf("!!! %s ", split_word);
         
+        if(split_word == NULL){
+            
+            free(n_address);
+            n_address = NULL;
+            free(m_entry);
+            m_entry = NULL;
+            return NULL;
+        }
+
+        
         int i;
         for(i = 0; split_word[i]; i++){
             split_word[i] = tolower(split_word[i]);

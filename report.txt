@@ -1,0 +1,46 @@
+Name: Ziming Guo
+DuckID: zimingg
+StudentID: 951432958
+
+CIS415 project0 report
+
+For mentry.c:
+
+	 * successfully compile.
+	 * compiles with no warnings.
+	 * works correctly
+	 * valgrind reports no memory errors
+	 
+For mlist.c:
+
+	 * successfully compile.
+	 * compiles with no warnings.
+	 * successfully links with finddupl.
+	 * links with no warnings.
+	 * works correctly with S.txt and M.txt
+	 * valgrind reports no memory errors
+
+My solution:
+
+I first worked on parsing the txt file(S.txt):
+
+	 * read every three lines and get data 
+	 * stored data I need to the struct “Adress” which assigned to mentry->self
+
+Then I filled all the methods in Mentry. After the mecat.c and medort.c work correctly, I moved to mlist.
+
+I first created the hash table inside the mlist. The sturct of the mlist is:
+
+
+
+			        -> size(the size of the hash table)
+	mlist —>self(Bucket) - |
+			       |                   -> data(mentry)
+				-> list(N_list)-> |
+		 				   -> next(nlist)   *(this part is a linkedlist)
+
+Then I filled all the methods in mlist.
+
+finally, I use valgrind to check memory leak and fixed all the memory leaks. Finished!
+
+

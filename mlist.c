@@ -1,3 +1,13 @@
+/*
+ authorship statement:
+ 
+ Name: Ziming Guo
+ DuckID: zimingg
+ Title of the assignment: CIS 415 Project 0
+ 
+ This is my own work.
+ 
+ */
 
 #include "mlist.h"
 #include "mentry.h"
